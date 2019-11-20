@@ -1,6 +1,6 @@
 {
-  "short_name": "Svlt nln pp",
-  "name": "Svelte Inlined App",
+  "short_name": "gaDash",
+  "name": "gaDash - Google Analytics Dashboard",
   "icons": [
     {
       "src": "images/svelte-192.png",
