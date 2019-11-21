@@ -24,7 +24,8 @@
           <div class="relative">
             <img
               on:click={toggleMenu}
-              class="inline rounded-full w-8 h-8 cursor-pointer"
+              class="inline rounded-full w-10 h-10 cursor-pointer border-2
+              border-white hover:border-gray-400 "
               src={gapiUser.imageUrl}
               alt="Profile image" />
           </div>
@@ -40,19 +41,10 @@
         <div class="flex justify-end">
           <span
             on:click={toggleMenu}
-            class=" font-extrabold cursor-pointer bg-gray-100 rounded-full w-8
-            h-8 block p-1">
-
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24">
-              <path
-                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41
-                19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-              <path d="M0 0h24v24H0z" fill="none" />
-            </svg>
+            class="text-center text-2xl font-extrabold cursor-pointer
+            bg-gray-200 rounded-full w-10 h-10 block border-2 cursor-pointer
+            hover:bg-gray-100 p-1">
+            ✖
           </span>
         </div>
         <div class="bg-white rounded shadow-md mt-1">
