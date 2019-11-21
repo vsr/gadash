@@ -5,6 +5,7 @@
 
   import Header from "./components/Header.svelte";
   import Footer from "./components/Footer.svelte";
+  import Intro from "./components/Intro.svelte";
   import { loadGoogleApi } from "./lib/loader";
 
   let gapiLoaded = false;
@@ -41,8 +42,10 @@
   <Header {gapiAuthenticated} {gapiUser} on:logout={signOut} />
   <div class="min-h-screen-3/4 flex-1 container mx-auto p-2">
 
-    <h2>analytics dashboard</h2>
-    <section id="auth-button" />
+    <div class:hidden={gapiAuthenticated}>
+      <Intro />
+      <section class="mx-2 my-4" id="auth-button" />
+    </div>
 
   </div>
   <Footer {appVersion} />
