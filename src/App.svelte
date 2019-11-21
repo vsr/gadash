@@ -6,7 +6,7 @@
   import Header from "./components/Header.svelte";
   import Footer from "./components/Footer.svelte";
   import Intro from "./components/Intro.svelte";
-  import { loadGoogleApi } from "./lib/loader";
+  import { loadGoogleApi, loadJs } from "./lib/loader";
 
   let gapiLoaded = false;
   let gapiAuthenticated = false;
@@ -25,7 +25,6 @@
 
       gapiLoaded = true;
       gapi.analytics.auth.on("success", function(response) {
-        console.log(response);
         gapiAuthenticated = true;
         gapiUser = gapi.analytics.auth.getUserProfile();
       });
@@ -50,3 +49,4 @@
   </div>
   <Footer {appVersion} />
 </div>
+<div class="hidden" />

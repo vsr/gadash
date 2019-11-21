@@ -8,7 +8,6 @@
   let menuShown = false;
 
   const toggleMenu = () => {
-    console.log("toggleMenu", menuShown);
     menuShown = !menuShown;
   };
 </script>
