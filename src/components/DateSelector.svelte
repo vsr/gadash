@@ -12,6 +12,11 @@
     "start-date": "7daysAgo",
     "end-date": "1daysAgo"
   };
+  const selectDate = () => {
+    if (date) {
+      dispatch("selected", date);
+    }
+  };
   onMount(() => {
     loadJs("/lib/date-range-selector.js", () => {
       dateSelector = new gapi.analytics.ext.DateRangeSelector({
@@ -26,13 +31,9 @@
         "start-date": dateSelector.startDateInput.value,
         "end-date": dateSelector.endDateInput.value
       };
+      selectDate();
     });
   });
-  const selectDate = () => {
-    if (date) {
-      dispatch("selected", date);
-    }
-  };
 </script>
 
 <div class="text-md font-medium">

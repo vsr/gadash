@@ -1,7 +1,11 @@
 <script>
   import DateSelector from "./DateSelector.svelte";
   import IdExplorer from "./IdExplorer.svelte";
+  import PropertyBoard from "./PropertyBoard.svelte";
+
   let dateRange;
+  let properties = [];
+  let viewData;
 
   const onDateSelected = ({ detail: detail }) => {
     dateRange = detail;
@@ -9,6 +13,7 @@
   };
   const addProperty = ({ detail: detail }) => {
     console.log("addProperty", detail);
+    properties = [...properties, detail];
   };
 </script>
 
@@ -21,5 +26,10 @@
       <DateSelector on:selected={onDateSelected} />
     </div>
 
+  </div>
+  <div class="flex flex-wrap">
+    {#each properties as property (property.ids)}
+      <PropertyBoard {dateRange} viewData={property} />
+    {/each}
   </div>
 </div>
