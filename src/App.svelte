@@ -6,6 +6,7 @@
   import Header from "./components/Header.svelte";
   import Footer from "./components/Footer.svelte";
   import Intro from "./components/Intro.svelte";
+  import DashboardPage from "./components/DashboardPage.svelte";
   import { loadGoogleApi, loadJs } from "./lib/loader";
 
   let gapiLoaded = false;
@@ -45,8 +46,29 @@
       <Intro />
       <section class="mx-2 my-4" id="auth-button" />
     </div>
+    {#if gapiUser}
+      <DashboardPage />
+    {/if}
 
   </div>
   <Footer {appVersion} />
 </div>
-<div class="hidden" />
+<div class="hidden">
+  <div class="DateRangeSelector">
+    <div class="DateRangeSelector-item">
+      <label>
+        <input />
+      </label>
+
+    </div>
+  </div>
+  <div class="ViewSelector2">
+    <div class="ViewSelector2-item">
+      <label>
+        <select>
+          <option />
+        </select>
+      </label>
+    </div>
+  </div>
+</div>
