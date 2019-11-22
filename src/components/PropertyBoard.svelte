@@ -4,6 +4,7 @@
   import { onMount, createEventDispatcher } from "svelte";
 
   let chartContainer1;
+  const dispatch = createEventDispatcher();
 
   let commonConfig = {
     query: {
@@ -44,12 +45,24 @@
 </script>
 
 {#if viewData}
-  <section class="p-2 m-2 rounded border shadow">
+  <section class="p-2 m-2 rounded border shadow relative">
     <h1 class="text-sm text-bold text-blue-800">
       {viewData.property.name}({viewData.view.name})
     </h1>
+
     <div class="flex">
       <div bind:this={chartContainer1} class="chart-x" />
     </div>
+
+    <span
+      on:click={() => {
+        dispatch('remove', viewData);
+      }}
+      class="absolute top-0 right-0 text-center text-xl font-extrabold
+      cursor-pointer bg-gray-200 text-red-600 rounded-full w-8 h-8 block border
+      hover:bg-gray-100 p-1"
+      title="Delete property dashboard">
+      ✖
+    </span>
   </section>
 {/if}

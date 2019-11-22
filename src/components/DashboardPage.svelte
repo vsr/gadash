@@ -2,18 +2,29 @@
   import DateSelector from "./DateSelector.svelte";
   import IdExplorer from "./IdExplorer.svelte";
   import PropertyBoard from "./PropertyBoard.svelte";
+  import { onMount } from "svelte";
+  import PropertyStore from "../lib/property-store";
 
   let dateRange;
+  let propertyStore;
   let properties = [];
   let viewData;
-
+  onMount(() => {
+    propertyStore = new PropertyStore();
+    properties = [...propertyStore.properties];
+  });
   const onDateSelected = ({ detail: detail }) => {
     dateRange = detail;
-    console.log("onDateSelected", dateRange);
   };
   const addProperty = ({ detail: detail }) => {
     console.log("addProperty", detail);
-    properties = [...properties, detail];
+    propertyStore.addProperty(detail);
+    properties = [...propertyStore.properties];
+  };
+  const removeProperty = ({ detail }) => {
+    console.log("removeProperty", detail);
+    propertyStore.removeProperty(detail);
+    properties = [...propertyStore.properties];
   };
 </script>
 
@@ -27,9 +38,13 @@
     </div>
 
   </div>
+  {properties.length}
   <div class="flex flex-wrap">
     {#each properties as property (property.ids)}
-      <PropertyBoard {dateRange} viewData={property} />
+      <PropertyBoard
+        {dateRange}
+        viewData={property}
+        on:remove={removeProperty} />
     {/each}
   </div>
 </div>
