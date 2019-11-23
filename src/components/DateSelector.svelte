@@ -2,10 +2,10 @@
   import { loadJs } from "../lib/loader";
   import { onMount, createEventDispatcher } from "svelte";
 
+  export let expanded = false;
   let dateSelectorEl;
   let dateSelector;
   let date;
-  let expanded = true;
   const dispatch = createEventDispatcher();
 
   const initDateRange = {
@@ -36,22 +36,25 @@
   });
 </script>
 
-<div class="text-md font-medium">
-  Select Date Range
-  <button
-    class="p-1 rounded bg-gray-900 text-gray-200 w-8 text-xl font-bold"
+<div class="relative p-2 border m-2 rounded">
+
+  <div
+    class="text-md font-medium cursor-pointer"
     on:click={() => {
       expanded = !expanded;
     }}>
-    {#if expanded}-{:else}+{/if}
-  </button>
-</div>
-<div class="flex items-end flex-wrap" class:hidden={!expanded}>
-  <div bind:this={dateSelectorEl} />
-  <button
-    on:click={selectDate}
-    class="p-1 h-8 text-sm text-gray-800 bg-gray-300 rounded border
-    hover:bg-gray-100">
-    Select Date
-  </button>
+    Select Date Range
+    <span class="text-gray-600 text-sm">
+      {#if expanded}(collapse){:else}(expand){/if}
+    </span>
+  </div>
+  <div class="flex items-end flex-wrap mt-2" class:hidden={!expanded}>
+    <div bind:this={dateSelectorEl} />
+    <button
+      on:click={selectDate}
+      class="text-sm bg-gray-800 rounded border text-gray-100 w-48 h-8 text-md
+      my-1 p-1 hover:bg-gray-700">
+      Select Date
+    </button>
+  </div>
 </div>

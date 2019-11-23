@@ -2,36 +2,35 @@
 @tailwind components;
 
 .DateRangeSelector {
-    @apply flex flex-wrap;
+  @apply flex flex-wrap;
 }
 
 .DateRangeSelector-item {
-    @apply mr-2 max-w-xs;
+  @apply mr-2 max-w-xs;
 }
 
 .DateRangeSelector-item label {
-    @apply text-sm text-gray-600 block;
+  @apply text-sm text-gray-600 block;
 }
 
 .DateRangeSelector-item input {
-    @apply text-gray-900 border p-1 font-mono;
+  @apply bg-gray-200 rounded border text-gray-800 w-48 h-8 text-sm my-1;
 }
 
 .ViewSelector2 {
-    @apply flex flex-wrap;
+  @apply flex flex-wrap;
 }
 
 .ViewSelector2-item {
-    @apply mr-2 max-w-xs;
+  @apply mr-2 max-w-xs;
 }
 
 .ViewSelector2-item label {
-    @apply text-sm text-gray-600 block;
+  @apply text-sm text-gray-600 block;
 }
 
 .ViewSelector2-item select {
-    @apply text-gray-900 border my-1 font-mono;
+  @apply bg-gray-200 rounded border text-gray-800 w-48 h-8 text-sm my-1;
 }
-
 
 @tailwind utilities;

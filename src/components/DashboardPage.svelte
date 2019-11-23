@@ -17,12 +17,10 @@
     dateRange = detail;
   };
   const addProperty = ({ detail: detail }) => {
-    console.log("addProperty", detail);
     propertyStore.addProperty(detail);
     properties = [...propertyStore.properties];
   };
   const removeProperty = ({ detail }) => {
-    console.log("removeProperty", detail);
     propertyStore.removeProperty(detail);
     properties = [...propertyStore.properties];
   };
@@ -30,15 +28,14 @@
 
 <div>
   <div class="flex flex-wrap">
-    <div class="p-2 border m-2 rounded">
-      <IdExplorer on:selected={addProperty} />
+    <div class="">
+      <IdExplorer on:selected={addProperty} expanded={false} />
     </div>
-    <div class="p-2 border m-2 rounded">
-      <DateSelector on:selected={onDateSelected} />
+    <div class="">
+      <DateSelector on:selected={onDateSelected} expanded={false} />
     </div>
 
   </div>
-  {properties.length}
   <div class="flex flex-wrap">
     {#each properties as property (property.ids)}
       <PropertyBoard
