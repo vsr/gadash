@@ -39,12 +39,12 @@
 <div class="relative p-2 border m-2 rounded">
 
   <div
-    class="text-md font-medium cursor-pointer"
+    class="text-sm font-medium cursor-pointer"
     on:click={() => {
       expanded = !expanded;
     }}>
     Select Date Range
-    <span class="text-gray-600 text-sm">
+    <span class="text-gray-600 text-xs">
       {#if expanded}(collapse){:else}(expand){/if}
     </span>
   </div>
@@ -52,8 +52,8 @@
     <div bind:this={dateSelectorEl} />
     <button
       on:click={selectDate}
-      class="text-sm bg-gray-800 rounded border text-gray-100 w-48 h-8 text-md
-      my-1 p-1 hover:bg-gray-700">
+      class="bg-gray-800 rounded border text-gray-100 w-48 h-8 text-sm my-1 p-1
+      hover:bg-gray-700">
       Select Date
     </button>
   </div>

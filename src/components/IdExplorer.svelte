@@ -31,12 +31,12 @@
 <div class="relative p-2 border m-2 rounded">
 
   <div
-    class="text-md font-medium cursor-pointer"
+    class="text-sm font-medium cursor-pointer"
     on:click={() => {
       expanded = !expanded;
     }}>
     Select GA Property
-    <span class="text-gray-600 text-sm">
+    <span class="text-gray-600 text-xs">
       {#if expanded}(collapse){:else}(expand){/if}
     </span>
   </div>
@@ -44,8 +44,8 @@
     <div bind:this={viewSelectorEl} />
     <button
       on:click={selectProperty}
-      class="text-sm bg-gray-800 rounded border text-gray-100 w-48 h-8 text-md
-      my-1 p-1 hover:bg-gray-700">
+      class="text-sm bg-gray-800 rounded border text-gray-100 w-48 h-8 my-1 p-1
+      hover:bg-gray-700">
       Add Property
     </button>
   </div>
