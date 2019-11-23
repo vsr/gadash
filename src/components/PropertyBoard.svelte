@@ -3,55 +3,70 @@
   export let dateRange;
   import { onMount, createEventDispatcher } from "svelte";
 
-  let chartContainer1;
+  let chartContainers = [];
   const dispatch = createEventDispatcher();
 
-  let commonConfig = {
-    query: {
-      metrics: "ga:sessions",
-      dimensions: "ga:date"
+  const chartConfigs = [
+    {
+      query: {
+        metrics:
+          "ga:sessions,ga:users,ga:pageviews,ga:bounceRate,ga:avgTimeOnPage,ga:avgPageLoadTime"
+      },
+      chart: {
+        type: "TABLE"
+      }
     },
-    chart: {
-      type: "LINE",
-      options: {
-        width: "100%"
+    {
+      query: {
+        metrics: "ga:sessions",
+        dimensions: "ga:date"
+      },
+      chart: {
+        type: "LINE",
+        options: {
+          width: "100%",
+          title: "Sessions over date range."
+        }
       }
     }
-  };
+  ];
 
-  let dataChart;
+  let dataCharts;
 
   const initChart = (dateRange, ids, container) => {
     console.log("initChart", { ...dateRange, ids });
-    const ch = new gapi.analytics.googleCharts.DataChart(commonConfig)
-      .set({ query: { ...dateRange, ids: ids } })
-      .set({ chart: { container } })
-      .execute();
-    console.log(ch);
-    return ch;
+    dataCharts = [];
+    chartConfigs.forEach((config, i) => {
+      dataCharts[i] = new gapi.analytics.googleCharts.DataChart(config)
+        .set({ query: { ...dateRange, ids: ids } })
+        .set({ chart: { container: chartContainers[i] } })
+        .execute();
+    });
   };
 
   onMount(() => {
-    console.log("onmount", dateRange, viewData, viewData.ids, chartContainer1);
-    if (dateRange && viewData && viewData.ids && chartContainer1) {
-      dataChart = initChart(dateRange, viewData.ids, chartContainer1);
+    console.log("onmount", dateRange, viewData, viewData.ids);
+    if (dateRange && viewData && viewData.ids) {
+      dataCharts = initChart(dateRange, viewData.ids);
     }
   });
 
-  $: dataChart =
-    dateRange && viewData && viewData.ids && chartContainer1
-      ? initChart(dateRange, viewData.ids, chartContainer1)
+  $: dataCharts =
+    dateRange && viewData && viewData.ids
+      ? initChart(dateRange, viewData.ids)
       : null;
 </script>
 
 {#if viewData}
-  <section class="p-2 m-2 rounded border shadow relative">
+  <section class="p-2 m-2 rounded border shadow relative max-w-full">
     <h1 class="text-sm text-bold text-blue-800">
       {viewData.property.name}({viewData.view.name})
     </h1>
 
-    <div class="flex">
-      <div bind:this={chartContainer1} class="chart-x" />
+    <div class="flex w-full flex-wrap">
+      {#each chartConfigs as chartConfig, i}
+        <div bind:this={chartContainers[i]} class="chart-x max-w-full" />
+      {/each}
     </div>
 
     <span
