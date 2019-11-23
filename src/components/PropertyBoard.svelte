@@ -4,6 +4,7 @@
   import { onMount, createEventDispatcher } from "svelte";
 
   let chartContainers = [];
+  let expanded = true;
   const dispatch = createEventDispatcher();
 
   const chartConfigs = [
@@ -14,6 +15,16 @@
       },
       chart: {
         type: "TABLE"
+      }
+    },
+    {
+      query: {
+        metrics: "ga:users",
+        dimensions: "ga:source"
+      },
+      chart: {
+        type: "PIE",
+        options: { title: "Traffic Sources" }
       }
     },
     {
@@ -58,26 +69,38 @@
 </script>
 
 {#if viewData}
-  <section class="p-2 m-2 rounded border shadow relative max-w-full">
-    <h1 class="text-sm text-bold text-blue-800">
-      {viewData.property.name}({viewData.view.name})
-    </h1>
+  <section
+    class="p-2 m-2 rounded border shadow relative max-w-full bg-gray-200">
+    <div class="flex">
+      <h1 class="text-sm font-bold text-blue-800 pr-8">
+        {viewData.property.name}({viewData.view.name})
+      </h1>
+      <span
+        class="text-xs font-bold cursor-pointer"
+        on:click={() => {
+          expanded = !expanded;
+        }}>
+        {#if expanded}(collapse){:else}(expand){/if}
+      </span>
+      <span
+        on:click={() => {
+          if (window.confirm('Do you really want to delete this property from dashboard?')) {
+            dispatch('remove', viewData);
+          }
+        }}
+        class="text-xs font-bold text-red-800 ml-2 cursor-pointer"
+        title="Delete property dashboard">
+        (delete)
+      </span>
+    </div>
 
-    <div class="flex w-full flex-wrap">
+    <div class="flex w-full flex-wrap" class:hidden={!expanded}>
       {#each chartConfigs as chartConfig, i}
-        <div bind:this={chartContainers[i]} class="chart-x max-w-full" />
+        <div
+          bind:this={chartContainers[i]}
+          class="p-1 m-1 shadow rounded max-w-full bg-gray-100" />
       {/each}
     </div>
 
-    <span
-      on:click={() => {
-        dispatch('remove', viewData);
-      }}
-      class="absolute top-0 right-0 text-center text-xl font-extrabold
-      cursor-pointer bg-gray-200 text-red-600 rounded-full w-8 h-8 block border
-      hover:bg-gray-100 p-1"
-      title="Delete property dashboard">
-      ✖
-    </span>
   </section>
 {/if}

@@ -28,10 +28,10 @@
   };
 </script>
 
-<div class="relative p-2 border m-2 rounded">
+<div class="relative p-1 border m-1 rounded">
 
   <div
-    class="text-sm font-medium cursor-pointer"
+    class="text-xs font-medium cursor-pointer"
     on:click={() => {
       expanded = !expanded;
     }}>
