@@ -4,6 +4,8 @@
   import { onMount, createEventDispatcher } from "svelte";
 
   let chartContainers = [];
+  let activeUsers;
+  let activeUsersContainer;
   let expanded = true;
   const dispatch = createEventDispatcher();
 
@@ -44,8 +46,9 @@
 
   let dataCharts;
 
-  const initChart = (dateRange, ids, container) => {
-    console.log("initChart", { ...dateRange, ids });
+  const initChart = (dateRange, ids) => {
+    console.log("initChart", { ...dateRange, ids, activeUsersContainer });
+
     dataCharts = [];
     chartConfigs.forEach((config, i) => {
       dataCharts[i] = new gapi.analytics.googleCharts.DataChart(config)
@@ -53,6 +56,11 @@
         .set({ chart: { container: chartContainers[i] } })
         .execute();
     });
+    activeUsers = new gapi.analytics.ext.ActiveUsers({
+      container: activeUsersContainer,
+      pollingInterval: 5,
+      query: { ids }
+    }).execute();
   };
 
   onMount(() => {
@@ -95,6 +103,9 @@
     </div>
 
     <div class="flex w-full flex-wrap" class:hidden={!expanded}>
+      <div
+        bind:this={activeUsersContainer}
+        class="p-1 m-1 shadow rounded max-w-full bg-gray-100" />
       {#each chartConfigs as chartConfig, i}
         <div
           bind:this={chartContainers[i]}

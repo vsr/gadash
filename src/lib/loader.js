@@ -1,11 +1,16 @@
 const SCRIPT = 'script';
 
+const loadedScripts = [];
+
 export const loadJs = (path, callback) => {
-    const js = document.createElement(SCRIPT);
-    const fjs = document.getElementsByTagName(SCRIPT)[0];
-    js.src = path;
-    js.onload = callback;
-    fjs.parentNode.insertBefore(js, fjs);
+    if (loadedScripts.indexOf(path) < 0) {
+        const js = document.createElement(SCRIPT);
+        const fjs = document.getElementsByTagName(SCRIPT)[0];
+        js.src = path;
+        js.onload = callback;
+        fjs.parentNode.insertBefore(js, fjs);
+        loadedScripts.push(path);
+    }
 };
 
 export const loadGoogleApi = (w, g) => {

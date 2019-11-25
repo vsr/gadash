@@ -17,6 +17,7 @@
 
   onMount(() => {
     loadGoogleApi(window, gapi);
+    loadJs("/lib/active-users.js", () => {});
 
     gapi.analytics.ready(function() {
       gapi.analytics.auth.authorize({
