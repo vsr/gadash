@@ -46,33 +46,55 @@
 
   let dataCharts;
 
-  const initChart = (dateRange, ids) => {
-    console.log("initChart", { ...dateRange, ids, activeUsersContainer });
+  const initChart = (dateRange, viewData) => {
+    console.log("initChart", {
+      ...dateRange,
+      ids: viewData.ids,
+      activeUsersContainer
+    });
 
     dataCharts = [];
     chartConfigs.forEach((config, i) => {
       dataCharts[i] = new gapi.analytics.googleCharts.DataChart(config)
-        .set({ query: { ...dateRange, ids: ids } })
+        .set({ query: { ...dateRange, ids: viewData.ids } })
         .set({ chart: { container: chartContainers[i] } })
         .execute();
     });
     activeUsers = new gapi.analytics.ext.ActiveUsers({
       container: activeUsersContainer,
-      pollingInterval: 5,
-      query: { ids }
-    }).execute();
+      pollingInterval: 5
+    });
+    activeUsers.once("success", function() {
+      var element = this.container.firstChild;
+      var timeout;
+
+      this.on("change", function(data) {
+        var element = this.container.firstChild;
+        var animationClass = data.delta > 0 ? "is-increasing" : "is-decreasing";
+        element.className += " " + animationClass;
+
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+          element.className = element.className.replace(
+            / is-(increasing|decreasing)/g,
+            ""
+          );
+        }, 3000);
+      });
+    });
+    activeUsers.set(viewData).execute();
   };
 
   onMount(() => {
     console.log("onmount", dateRange, viewData, viewData.ids);
     if (dateRange && viewData && viewData.ids) {
-      dataCharts = initChart(dateRange, viewData.ids);
+      dataCharts = initChart(dateRange, viewData);
     }
   });
 
   $: dataCharts =
     dateRange && viewData && viewData.ids
-      ? initChart(dateRange, viewData.ids)
+      ? initChart(dateRange, viewData)
       : null;
 </script>
 
