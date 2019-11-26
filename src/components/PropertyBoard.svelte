@@ -1,7 +1,7 @@
 <script>
   export let viewData;
   export let dateRange;
-  import { onMount, createEventDispatcher } from "svelte";
+  import { onMount, createEventDispatcher, tick } from "svelte";
 
   let chartContainers = [];
   let activeUsers;
@@ -46,7 +46,8 @@
 
   let dataCharts;
 
-  const initChart = (dateRange, viewData) => {
+  const initChart = async (dateRange, viewData) => {
+    await tick();
     console.log("initChart", {
       ...dateRange,
       ids: viewData.ids,
@@ -60,9 +61,10 @@
         .set({ chart: { container: chartContainers[i] } })
         .execute();
     });
+
     activeUsers = new gapi.analytics.ext.ActiveUsers({
       container: activeUsersContainer,
-      pollingInterval: 5
+      pollingInterval: 12
     });
     activeUsers.once("success", function() {
       var element = this.container.firstChild;

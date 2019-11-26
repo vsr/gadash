@@ -13,7 +13,11 @@ class PropertyStore {
     localStorage.setItem(PROPERTY_KEY, JSON.stringify(this.properties));
   }
   addProperty(property) {
-    this.properties = [property, ...this.properties];
+    const props = [property, ...this.properties];
+    const ids = props.map(p => p.ids);
+    this.properties = props.filter(
+      (prop, index) => ids.indexOf(prop.ids) === index
+    );
     this.saveToLocalStorage();
   }
   setProperties(properties) {
