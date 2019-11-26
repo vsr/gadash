@@ -33,4 +33,8 @@
   @apply bg-gray-200 rounded border text-gray-800 w-48 h-8 text-sm my-1;
 }
 
+.ActiveUsers {
+  @apply inline bg-blue-800 text-blue-100 font-normal p-1 rounded ml-1;
+}
+
 @tailwind utilities;

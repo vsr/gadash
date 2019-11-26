@@ -104,6 +104,7 @@
     <div class="flex">
       <h1 class="text-sm font-bold text-blue-800 pr-8">
         {viewData.property.name}({viewData.view.name})
+        <span bind:this={activeUsersContainer} />
       </h1>
       <span
         class="text-xs font-bold cursor-pointer"
@@ -125,9 +126,9 @@
     </div>
 
     <div class="flex w-full flex-wrap" class:hidden={!expanded}>
-      <div
+      <!-- <div
         bind:this={activeUsersContainer}
-        class="p-1 m-1 shadow rounded max-w-full bg-gray-100" />
+        class="p-1 m-1 shadow rounded max-w-full bg-gray-100" /> -->
       {#each chartConfigs as chartConfig, i}
         <div
           bind:this={chartContainers[i]}
