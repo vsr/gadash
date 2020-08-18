@@ -14,7 +14,7 @@
 }
 
 .DateRangeSelector-item input {
-  @apply bg-gray-200 rounded border text-gray-800 w-48 h-8 text-sm my-1;
+  @apply bg-gray-200 rounded border text-gray-800 w-32 h-6 text-xs my-1;
 }
 
 .ViewSelector2 {
@@ -30,7 +30,7 @@
 }
 
 .ViewSelector2-item select {
-  @apply bg-gray-200 rounded border text-gray-800 w-48 h-8 text-sm my-1;
+  @apply bg-gray-200 rounded border text-gray-800 w-32 h-6 text-sm my-1;
 }
 
 .ActiveUsers {

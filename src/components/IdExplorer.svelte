@@ -44,7 +44,7 @@
     <div bind:this={viewSelectorEl} />
     <button
       on:click={selectProperty}
-      class="text-sm bg-gray-800 rounded border text-gray-100 w-48 h-8 my-1 p-1
+      class="text-xs bg-gray-800 rounded border text-gray-100 h-6 my-1 p-1
       hover:bg-gray-700">
       Add Property
     </button>

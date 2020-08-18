@@ -28,13 +28,14 @@
 
 <div>
   <div class="flex flex-wrap">
-    <div class="">
-      <IdExplorer on:selected={addProperty} expanded={false} />
+    <div class="border-b p-2 flex flex-wrap w-full">
+      <div class="">
+        <IdExplorer on:selected={addProperty} expanded={false} />
+      </div>
+      <div class="">
+        <DateSelector on:selected={onDateSelected} expanded={false} />
+      </div>
     </div>
-    <div class="">
-      <DateSelector on:selected={onDateSelected} expanded={false} />
-    </div>
-
   </div>
   <div class="flex flex-wrap">
     {#each properties as property (property.ids)}

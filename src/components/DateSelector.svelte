@@ -52,7 +52,7 @@
     <div bind:this={dateSelectorEl} />
     <button
       on:click={selectDate}
-      class="bg-gray-800 rounded border text-gray-100 w-48 h-8 text-sm my-1 p-1
+      class="bg-gray-800 rounded border text-gray-100 h-6 text-xs my-1 p-1
       hover:bg-gray-700">
       Select Date
     </button>
