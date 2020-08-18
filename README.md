@@ -2,15 +2,9 @@
 
 Google Analytics Dashboard
 
-## Using this template
-
-```sh
-npx degit vsr/svelte-inlined-template svelte-app
-cd svelte-app
-npm i
-```
-
 ## Development
+
+Create `.env` file and specify google analytics client id as `GA_CLIENT_ID`.
 
 ```sh
 npm i
