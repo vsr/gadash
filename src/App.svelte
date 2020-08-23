@@ -45,7 +45,13 @@
 
     <div class:hidden={gapiAuthenticated}>
       <Intro />
-      <section class="mx-2 my-4" id="auth-button" />
+      <section class="mx-2 my-4" id="auth-button">
+        {#if !gapiLoaded}
+          <p class="loading-message animate-bounce">
+            Loading google analytics library...
+          </p>
+        {/if}
+      </section>
     </div>
     {#if gapiUser}
       <DashboardPage />

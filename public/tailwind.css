@@ -37,4 +37,8 @@
   @apply inline bg-blue-800 text-blue-100 font-normal p-1 rounded ml-1;
 }
 
+select[name="date-period"] {
+  @apply bg-gray-200 rounded border text-gray-800 w-32 h-6 text-sm my-1;
+}
+
 @tailwind utilities;
